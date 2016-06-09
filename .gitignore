@@ -18,3 +18,5 @@
 !/tmp/.keep
 
 config/master.key
+config/credentials.yml.enc
+/coverage/
