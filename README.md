@@ -22,6 +22,43 @@ Vorbereitung
     * CSS-Selektoren
     * Scaffolding
     * Verwendung regulärer Ausdrücke in Ruby (gsub, =~, matches)
+    
+Anfangszustand
+==============
+`48 tests, 0 assertions, 0 failures, 48 errors, 0 skips`
+
+Aufgabe
+=======
+
+Erstelle ein Programm zur Verwaltung von verteilten Datenbanken. Dazu sind folgende Modelle notwendig (Beim Generator die Option -s nicht vergessen!):
+
+* User
+    * email:string
+    * username:string
+    * password_digest:string
+    * Hat mehrere Databases
+* Environment
+    * name:string
+    * Hat mehrere Hosts
+* Host
+    * hostname:string
+    * ip:string
+    * operating_system:string
+    * Gehört zu genau einer Umgebung
+    * Hat viele Datenbanken
+* Database
+    * name:string
+    * description:text
+    * Läuft auf vielen Hosts
+    * Hat mehrere User
+
+Weiteres Vorgehen
+-----------------
+
+* Erzeuge die notwendigen Modelle, Tabellen und Join-Tabellen
+* Der `root_path` soll auf `'databases#index'` zeigen.
+* Zu einigen Tests finden sich in den jeweiligen Kommentaren zu dem Test weitere Hinweise zur Implementierung. 
+* Bearbeitungszeit: 90 Minuten
 
 Abgabe
 ======
