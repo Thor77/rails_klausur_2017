@@ -24,30 +24,30 @@ class HostsControllerTest < ActionController::TestCase
 
   test "should create host" do
     assert_difference('Host.count') do
-      post :create, host: {environment_id: @host.environment_id, hostname: @host.hostname+'1', ip: @host.ip.next, operating_system: @host.operating_system}
+      post :create, params: { host: {environment_id: @host.environment_id, hostname: @host.hostname+'1', ip: @host.ip.next, operating_system: @host.operating_system} }
     end
 
     assert_redirected_to host_path(assigns(:host))
   end
 
   test "should show host" do
-    get :show, id: @host
+    get :show, params: { id: @host }
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @host
+    get :edit, params: { id: @host }
     assert_response :success
   end
 
   test "should update host" do
-    patch :update, id: @host, host: {environment_id: @host.environment_id, hostname: @host.hostname+'1', ip: @host.ip.next, operating_system: @host.operating_system}
+    patch :update, params: { id: @host, host: {environment_id: @host.environment_id, hostname: @host.hostname+'1', ip: @host.ip.next, operating_system: @host.operating_system} }
     assert_redirected_to host_path(assigns(:host))
   end
 
   test "should destroy host" do
     assert_difference('Host.count', -1) do
-      delete :destroy, id: @host
+      delete :destroy, params: { id: @host }
     end
 
     assert_redirected_to hosts_path
@@ -56,14 +56,14 @@ class HostsControllerTest < ActionController::TestCase
   # Hier ist der reguläre Ausdruck für die Validierung der IP-Adresse
   #     \A(?:[0-9]{1,3}\.){3}[0-9]{1,3}\z
   test "shouldn't update host with an invalid IP" do
-    patch :update, id: @host, host: {ip: "invalid", hostname: '2'}
+    patch :update, params: { id: @host, host: { ip: "invalid", hostname: '2' } }
     assert_response :success
     assert_select "#error_explanation > h2", "1 error prohibited this host from being saved:"
     assert_select "li", "Ip is invalid"
   end
 
   test "shouldn't create with an invalid IP" do
-    post :create, host: {name: nil}
+    post :create, params: { host: { name: nil } }
     assert_response :success
     assert_select "#error_explanation > h2", "1 error prohibited this host from being saved:"
     assert_select "li", "Ip is invalid"
