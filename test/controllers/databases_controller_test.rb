@@ -47,7 +47,7 @@ class DatabasesControllerTest < ActionController::TestCase
 
   test "should create database" do
     assert_difference('Database.count') do
-      post :create, database: {description: @database.description, name: @database.name}
+      post :create, params: { database: { description: @database.description, name: @database.name } }
     end
 
     assert_redirected_to database_path(assigns(:database))
@@ -55,7 +55,7 @@ class DatabasesControllerTest < ActionController::TestCase
 
   # Hint: collection_check_boxes
   test 'the form shows collection_check_boxes for Hosts' do
-    get :edit, id: @database
+    get :edit, params: { id: @database }
     assert_select '.field' do
       assert_select 'label[for="database_host_ids"]', "Hosts"
       assert_select 'input[name="database[host_ids][]"]'
@@ -64,7 +64,7 @@ class DatabasesControllerTest < ActionController::TestCase
 
   # Hint: collection_check_boxes
   test 'the form shows collection_check_boxes for Users' do
-    get :edit, id: @database
+    get :edit, params: { id: @database }
     assert_select '.field' do
       assert_select 'label[for="database_user_ids"]', "Give access to users"
       assert_select 'input[name="database[user_ids][]"]'
@@ -72,23 +72,23 @@ class DatabasesControllerTest < ActionController::TestCase
   end
 
   test "should show database" do
-    get :show, id: @database
+    get :show, params: { id: @database }
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @database
+    get :edit, params: { id: @database }
     assert_response :success
     assert_select 'form.ui.form'
   end
 
   test "should update database" do
-    patch :update, id: @database, database: {description: @database.description, name: @database.name}
+    patch :update, params: { id: @database, database: {description: @database.description, name: @database.name} }
     assert_redirected_to database_path(assigns(:database))
   end
 
   test "Should update database with users and hosts" do
-    patch :update, id: @database, database: {description: @database.description, name: @database.name, host_ids: [hosts(:one).id], user_ids: [users(:one).id]}
+    patch :update, params: { id: @database, database: {description: @database.description, name: @database.name, host_ids: [hosts(:one).id], user_ids: [users(:one).id]} }
     assert_redirected_to database_path(assigns(:database))
     assert_equal [hosts(:one).id], assigns(:database).host_ids
     assert_equal [users(:one).id], assigns(:database).user_ids
@@ -96,21 +96,21 @@ class DatabasesControllerTest < ActionController::TestCase
 
   test "should destroy database" do
     assert_difference('Database.count', -1) do
-      delete :destroy, id: @database
+      delete :destroy, params: { id: @database }
     end
 
     assert_redirected_to databases_path
   end
 
   test "shouldn't update database without a name" do
-    patch :update, id: @database, database: {name: nil}
+    patch :update, params: { id: @database, database: {name: nil} }
     assert_response :success
     assert_select "#error_explanation > h2", "1 error prohibited this database from being saved:"
     assert_select "li", "Name can't be blank"
   end
 
   test "shouldn't create without name" do
-    post :create, database: {name: nil}
+    post :create, params: { database: { name: nil } }
     assert_response :success
     assert_select "#error_explanation > h2", "1 error prohibited this database from being saved:"
     assert_select "li", "Name can't be blank"
