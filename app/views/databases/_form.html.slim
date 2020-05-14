@@ -15,8 +15,7 @@
   .field
     = f.label :host_ids, "Hosts"
     = f.collection_check_boxes :host_ids, Host.all, :id, :hostname
-  .fields
-    = f.label :database_user_ids, "Give access to users"
+  .field
+    = f.label :user_ids, "Give access to users"
     = f.collection_check_boxes :user_ids, User.all, :id, :username
-    // assert_select 'label[for="database_user_ids"]', "Give access to users"
   .actions = f.submit
