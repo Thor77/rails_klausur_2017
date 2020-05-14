@@ -1,4 +1,4 @@
-= form_for @environment do |f|
+= form_for @environment, html: {class: "ui form"} do |f|
   - if @environment.errors.any?
     #error_explanation
       h2 = "#{pluralize(@environment.errors.count, "error")} prohibited this environment from being saved:"
