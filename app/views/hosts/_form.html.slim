@@ -1,0 +1,22 @@
+= form_for @host, html: { class: 'ui form' } do |f|
+  - if @host.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@host.errors.count, "error")} prohibited this host from being saved:"
+      ul
+        - @host.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :hostname
+    = f.text_field :hostname
+  .field
+    = f.label :ip
+    = f.text_field :ip
+  .field
+    = f.label :operating_system
+    = f.text_field :operating_system
+  .field
+    = f.label :environment
+    = f.collection_select :environment, Environment.all, :id, :name
+    = link_to "New Environment", new_environment_path, class: 'ui button'
+  .actions = f.submit

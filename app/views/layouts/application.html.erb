@@ -10,6 +10,15 @@
   </head>
 
   <body>
-    <%= yield %>
+  <nav class="ui menu">
+   <a class="item">Home</a>
+  </nav>
+  <main class="ui page grid">
+    <div class="row">
+      <div class="column">
+        <%= yield %>
+      </div>
+    </div>
+  </main>
   </body>
 </html>

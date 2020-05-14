@@ -10,6 +10,51 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2020_05_14_144628) do
+
+  create_table "databases", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "databases_hosts", id: false, force: :cascade do |t|
+    t.integer "host_id", null: false
+    t.integer "database_id", null: false
+    t.index ["database_id", "host_id"], name: "index_databases_hosts_on_database_id_and_host_id"
+    t.index ["host_id", "database_id"], name: "index_databases_hosts_on_host_id_and_database_id"
+  end
+
+  create_table "databases_users", id: false, force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "database_id", null: false
+    t.index ["database_id", "user_id"], name: "index_databases_users_on_database_id_and_user_id"
+    t.index ["user_id", "database_id"], name: "index_databases_users_on_user_id_and_database_id"
+  end
+
+  create_table "environments", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "hosts", force: :cascade do |t|
+    t.string "hostname"
+    t.string "ip"
+    t.string "operating_system"
+    t.integer "environment_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["environment_id"], name: "index_hosts_on_environment_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email"
+    t.string "username"
+    t.string "password_digest"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
 end

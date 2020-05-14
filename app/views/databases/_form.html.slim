@@ -1,0 +1,22 @@
+= form_for @database, html: { class: 'ui form' } do |f|
+  - if @database.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@database.errors.count, "error")} prohibited this database from being saved:"
+      ul
+        - @database.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :description
+    = f.text_area :description
+  .field
+    = f.label :host_ids, "Hosts"
+    = f.collection_check_boxes :host_ids, Host.all, :id, :hostname
+  .fields
+    = f.label :database_user_ids, "Give access to users"
+    = f.collection_check_boxes :user_ids, User.all, :id, :username
+    // assert_select 'label[for="database_user_ids"]', "Give access to users"
+  .actions = f.submit

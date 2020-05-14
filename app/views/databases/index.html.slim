@@ -1,0 +1,27 @@
+h1 Databases
+
+table.ui.table
+  thead
+    tr
+      th
+      th Users
+      th
+      th
+
+  tbody
+    - @databases.each do |database|
+      tr
+        td
+          ul
+            - database.hosts.each do |host|
+              li
+                a href="/hosts/#{host.id}" = host.hostname
+        td
+          ul
+            - database.users.each do |user|
+              li
+                a href="/users/#{user.id}" = user.username
+
+br
+
+= link_to 'New Database', new_database_path

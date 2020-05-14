@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong Hostname:
+  = @host.hostname
+p
+  strong Ip:
+  = @host.ip
+p
+  strong Operating system:
+  = @host.operating_system
+
+=> link_to 'Edit', edit_host_path(@host)
+'|
+=< link_to 'Back', hosts_path
