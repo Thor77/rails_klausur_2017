@@ -55,6 +55,4 @@ ActiveRecord::Schema.define(version: 2020_05_14_164423) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "databases", "hosts"
-  add_foreign_key "hosts", "environments"
 end
