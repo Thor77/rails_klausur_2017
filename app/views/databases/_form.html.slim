@@ -1,4 +1,4 @@
-= form_for @database do |f|
+= form_for @database, html: {class: "ui form"} do |f|
   - if @database.errors.any?
     #error_explanation
       h2 = "#{pluralize(@database.errors.count, "error")} prohibited this database from being saved:"
@@ -6,6 +6,8 @@
         - @database.errors.full_messages.each do |message|
           li = message
 
+  = link_to 'New Host', new_host_path, class: "ui button"
+  = link_to 'New User', new_user_path, class: "ui button"
   .field
     = f.label :name
     = f.text_field :name
