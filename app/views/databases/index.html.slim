@@ -18,13 +18,13 @@ table.ui.table
           ul
           - database.users.each do |user|
             li
-              = link_to "#{user.username}", users_path(user)
+              a href="/users/#{user.id}" = user.username
 
         td
           ul
           - database.hosts.each do |host|
             li
-              = link_to "#{host.hostname}", hosts_path(host)
+              a href="/hosts/#{host.id}" = host.hostname
         td = link_to 'Show', database
         td = link_to 'Edit', edit_database_path(database)
         td = link_to 'Destroy', database, data: { confirm: 'Are you sure?' }, method: :delete
