@@ -1,0 +1,12 @@
+p#notice = notice
+
+p
+  strong Name:
+  = @database.name
+p
+  strong Description:
+  = @database.description
+
+=> link_to 'Edit', edit_database_path(@database)
+'|
+=< link_to 'Back', databases_path
